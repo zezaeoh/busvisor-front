@@ -1,0 +1,35 @@
+.login {
+  display: flex; 
+}
+
+.login .content {
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  margin: auto;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  align-items: center;
+  text-align: center; 
+}
+
+.login .content h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 3.5rem;
+  margin-bottom: 5rem; 
+}
+
+.login .content h3 {
+  font-weight: 500;
+  font-size: 2.1875rem;
+  margin-bottom: 0.625rem; 
+}
+
+.login .content p {
+  color: #818EA3; 
+}
+
+.login .content .login_layout {
+  min-width: 15rem;
+}

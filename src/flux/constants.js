@@ -1,0 +1,6 @@
+export default {
+  CHANGE_TOGGLE: 0,
+  CHANGE_LOGIN_STATUS: 1,
+  TOGGLE_SIDEBAR: 100,
+  LOGIN: 200
+};

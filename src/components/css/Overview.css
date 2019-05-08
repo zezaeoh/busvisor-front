@@ -1,0 +1,39 @@
+.overview {
+  display: flex; 
+}
+.overview__content {
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  margin: auto;
+  margin-top: 1rem;
+  align-items: center;
+  text-align: center; 
+}
+.overview__content h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 3.5rem;
+  margin-bottom: 1.5625rem; 
+}
+.overview__content h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.625rem; 
+  color: #818EA3; 
+}
+.overview__content span {
+  font-size: 1.5rem;
+  color: #17c671;
+}
+.overview__content p {
+  color: #818EA3; 
+}
+.overview__content img {
+  max-width: 80%;
+}
+.overview__content b {
+  font-size: 2rem;
+  font-weight: 1000;
+  color: #3d5170;
+}

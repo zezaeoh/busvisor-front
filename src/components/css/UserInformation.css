@@ -1,0 +1,7 @@
+.header_content {
+  display: flex;
+}
+
+.header_content .heavy{
+  flex: 1;
+}
