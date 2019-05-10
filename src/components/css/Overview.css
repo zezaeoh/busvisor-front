@@ -8,6 +8,7 @@
   margin: auto;
   margin-top: 1rem;
   align-items: center;
+  min-width: 100%;
   text-align: center; 
 }
 .overview__content h2 {
@@ -24,13 +25,19 @@
 }
 .overview__content span {
   font-size: 1.5rem;
+}
+.okay{
   color: #17c671;
+}
+.emerg{
+  color: #ff0000;
 }
 .overview__content p {
   color: #818EA3; 
 }
 .overview__content img {
-  max-width: 80%;
+  width: 80%;
+  max-width: 490px;
 }
 .overview__content b {
   font-size: 2rem;
