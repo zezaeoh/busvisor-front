@@ -1,70 +1,74 @@
-import React from "react";
-import { Container, CardHeader, Button, Row, Col, Card, CardBody} from "shards-react";
-import { Link } from "react-router-dom";
+import React from "react"
+import axios from 'axios'
+import { Container,Row, Col } from "shards-react"
 
-import PageTitle from "./../components/common/PageTitle";
-import UserDetails from "./../components/user-profile-lite/UserDetails";
+import PageTitle from "./../components/common/PageTitle"
+import UserDetails from "./../components/user-information/UserDetails"
+import ActiveDevice from "./../components/user-information/ActiveDevice"
 import "../components/css/UserInformation.css"
 
-const UserInformation = (props) => (
-  <Container fluid className="main-content-container px-4 pb-4">
-    {/* Page Header */}
-    <Row noGutters className="page-header py-4">
-      <PageTitle title="User Information" subtitle="Busvisor" className="text-sm-left mb-3" />
-    </Row>
+class UserInformation extends React.Component {
+  state = {
+    userDetails: {
+      name: "member",
+      avatar: require("./../images/avatars/user.png"),
+      id: "id",
+      performanceReportTitle: "Workload",
+      performanceReportValue: 0,
+      metaTitle: "Description",
+      metaValue:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?"
+    },
+    devices: []
+  }
 
-    <Row>
-      <Col lg="4">
-        <UserDetails />
-      </Col>
-      <Col lg="8">
-        <Card small className="mb-4">
-          <CardHeader className="border-bottom">
-            <div className="m-0 header_content">
-              <div className="heavy">Active Device</div>
-              <Button outline pill theme="secondary" tag={Link} to="/add-device">add device</Button>
-            </div>
-          </CardHeader>
-          <CardBody className="p-0 pb-3">
-            <table className="table mb-0">
-              <thead className="bg-light">
-                <tr>
-                  <th scope="col" className="border-0">
-                    #
-                  </th>
-                  <th scope="col" className="border-0">
-                    Divce Id
-                  </th>
-                  <th scope="col" className="border-0">
-                    Registerd Time
-                  </th>
-                  <th scope="col" className="border-0">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>BSD1622DS88Q</td>
-                  <td>2019-03-22</td>
-                  <td>online</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>HS234T75W223</td>
-                  <td>2019-04-01</td>
-                  <td>offline</td>
-                </tr>
-              </tbody>
-            </table>
-          </CardBody>
-        </Card>
-      </Col>
-    </Row>
+  handleUpdateUserDetails = (user) => {
+    this.setState({
+      userDetails: {
+        ...this.state.userDetails,
+        name: user.name,
+        id: user.id
+      }
+    });
+  }
 
+  handleUpdateDevices = (devices) => {
+    this.setState({
+      devices: devices
+    });
+  }
+
+  componentDidMount() {
+    const url = 'http://52.231.67.172:8088/api/user/test';
+
+    axios.get(url)
+      .then(res => {
+        this.handleUpdateUserDetails(res.data);
+        this.handleUpdateDevices(res.data.devices);
+      })
+      .catch(e => console.log(e));
+  }
+
+  render() {
+    return (
+      <Container fluid className="main-content-container px-4 pb-4">
+        {/* Page Header */}
+        <Row noGutters className="page-header py-4">
+          <PageTitle title="User Information" subtitle="Busvisor" className="text-sm-left mb-3" />
+        </Row>
+
+        <Row>
+          <Col lg="4">
+            <UserDetails userDetails={this.state.userDetails}/>
+          </Col>
+          <Col lg="8">
+            <ActiveDevice devices={this.state.devices}/>
+          </Col>
+        </Row>
     
-  </Container>
-);
+      </Container>
+    );
+  }
+}
 
 export default UserInformation;

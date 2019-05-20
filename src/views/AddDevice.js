@@ -1,77 +1,95 @@
 import React from "react";
+import axios from 'axios';
 import {
   Container,
-  Card, 
-  CardBody,
-  CardHeader,
-  ListGroup,
-  ListGroupItem,
   Row,
   Col,
-  Form,
-  FormInput,
-  FormGroup,
-  Button
 } from "shards-react";
 
 import PageTitle from "./../components/common/PageTitle";
+import DeviceForm from "./../components/add-device/DeviceForm";
 
-const AddDevice = () => (
-  <Container fluid className="main-content-container px-4 pb-4">
-    {/* Page Header */}
-    <Row noGutters className="page-header py-4">
-      <PageTitle title="Add Device" subtitle="Busvisor" className="text-sm-left mb-3" />
-    </Row>
+class AddDevice extends React.Component {
+  state = {
+    is_confirm: false,
+    device_id: '',
+    ec1_num: 3,
+    ec2_num: 3,
+    ec1: ['', '', ''],
+    ec2: ['', '', ''],
+  }
 
-    <Row>
-      <Col>
-        <Card>
-          <CardHeader className="border-bottom">
-            <h6 className="m-0">Fill The Blank</h6>
-          </CardHeader>
-          <CardBody>
-            <ListGroup flush>
-              <ListGroupItem className="p-3">
-                <Row>
-                  <Col>
-                    <Form>
-                      <FormGroup>
-                        <label htmlFor="feDeviceId">Device Id</label>
-                        <Row className="m-0">
-                          <FormInput
-                            id="feDeviceId"
-                            placeholder="Device Id"
-                            style={{flex: 1}}
-                          />
-                          <Button className="ml-1">check</Button>
-                        </Row>
-                      </FormGroup>
+  handleDeviceIdChange = (e) => {
+    this.setState({
+      device_id: e.target.value
+    });
+  }
 
-                      <FormGroup>
-                        <label htmlFor="feEc1-1">1st Emergency Contact</label>
-                        <FormInput id="feEc1-1" placeholder="010-0000-0000" />
-                        <FormInput id="feEc1-2" placeholder="010-0000-0000" />
-                        <FormInput id="feEc1-3" placeholder="010-0000-0000" />
-                      </FormGroup>
+  handleChangeConfirmStatus = () => {
+    if(window.confirm('사용가능한 기기입니다. 등록하시겠습니까?'))
+      this.setState({
+        is_confirm: true
+      })
+  }
 
-                      <FormGroup>
-                        <label htmlFor="feEc2-1">2nd Emergency Contact</label>
-                        <FormInput id="feEc2-1" placeholder="010-0000-0000" />
-                        <FormInput id="feEc2-2" placeholder="010-0000-0000" />
-                        <FormInput id="feEc2-3" placeholder="010-0000-0000" />
-                      </FormGroup>
+  handleChangeEmergencyContact1 = (target_idx, e) => {
+    this.setState({
+      ec1: this.state.ec1.map((item, idx) =>{
+        if(idx === target_idx)
+          return e.target.value;
+        return item;
+      })
+    });
+  }
 
-                      <Button className="float-right" type="submit">Create New Device</Button>
-                    </Form>
-                  </Col>
-                </Row>
-              </ListGroupItem>
-            </ListGroup>
-          </CardBody>
-        </Card>
-      </Col>
-    </Row>
-  </Container>
-);
+  handleChangeEmergencyContact2 = (target_idx, e) => {
+    this.setState({
+      ec1: this.state.ec2.map((item, idx) =>{
+        if(idx === target_idx)
+          return e.target.value;
+        return item;
+      })
+    });
+  }
+
+  handleDeviceIdCheck = () => {
+    const url = `http://52.231.67.172:8088/api/device/${this.state.device_id}`;
+
+    axios.get(url)
+      .then(res => {
+        if(res.status === 200){
+          this.handleChangeConfirmStatus()
+        }
+        else if(res.status === 403)
+          alert('이미 사용중인 기기입니다!')
+      })
+      .catch(e => alert('존재하지 않는 기기 아이디 입니다!'))
+  }
+
+  render() {
+    return (
+      <Container fluid className="main-content-container px-4 pb-4">
+        {/* Page Header */}
+        <Row noGutters className="page-header py-4">
+          <PageTitle title="Add Device" subtitle="Busvisor" className="text-sm-left mb-3" />
+        </Row>
+
+        <Row>
+          <Col>
+            <DeviceForm 
+              is_confirm={this.state.is_confirm}
+              handleDeviceIdChange={this.handleDeviceIdChange}
+              handleDeviceIdCheck={this.handleDeviceIdCheck}
+              ec1_num={this.state.ec1_num}
+              handleChangeEmergencyContact1={this.handleChangeEmergencyContact1}
+              ec2_num={this.state.ec2_num}
+              handleChangeEmergencyContact2={this.handleChangeEmergencyContact2}
+            />
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
 
 export default AddDevice;

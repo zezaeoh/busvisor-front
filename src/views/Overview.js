@@ -8,8 +8,8 @@ import DrivingHistory from "./../components/overview/DrivingHistory"
 
 class Overview extends React.Component {
   state = {
-    dr_status: -1,
-    dr_cnt: 5
+    dr_status: 0,
+    dr_cnt: 0
   }
   
   getStatus = (url, cb) => {
@@ -28,7 +28,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    const url = 'http://52.231.67.172:8088/api/device/status/sc13150';
+    const url = 'http://52.231.67.172:8088/api/device/sc13150/status';
 
     this.getStatus(url, this.handleChangeState);
     this.timer = setInterval(this.getStatus, 1000, url, this.handleChangeState);

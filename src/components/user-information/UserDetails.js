@@ -21,7 +21,7 @@ const UserDetails = ({ userDetails }) => (
         />
       </div>
       <h4 className="mb-0">{userDetails.name}</h4>
-      <span className="text-muted d-block mb-2">{userDetails.jobTitle}</span>
+      <span className="text-muted d-block mb-2">{userDetails.id}</span>
       <Button pill outline size="sm" className="mb-2">
         <i className="material-icons mr-1">person_add</i> Follow
       </Button>
@@ -57,19 +57,6 @@ UserDetails.propTypes = {
    * The user details object.
    */
   userDetails: PropTypes.object
-};
-
-UserDetails.defaultProps = {
-  userDetails: {
-    name: "member", 
-    avatar: require("./../../images/avatars/user.png"),
-    jobTitle: "Job Title Here",
-    performanceReportTitle: "Workload",
-    performanceReportValue: 0,
-    metaTitle: "Description",
-    metaValue:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?"
-  }
 };
 
 export default UserDetails;
