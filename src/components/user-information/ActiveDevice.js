@@ -30,10 +30,10 @@ const ActiveDevice = ({ devices }) => (
         </thead>
         <tbody>
         {devices.map((item, idx) => (
-          <tr>
+          <tr key={idx}>
             <td>{idx + 1}</td>
             <td>{item.id}</td>
-            <td>{item.regTime}</td>
+            <td>{item.regTime.split('T')[0]}</td>
             <td>online</td>
           </tr>
         ))}

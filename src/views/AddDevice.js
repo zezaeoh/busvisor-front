@@ -32,24 +32,36 @@ class AddDevice extends React.Component {
       })
   }
 
-  handleChangeEmergencyContact1 = (target_idx, e) => {
-    this.setState({
-      ec1: this.state.ec1.map((item, idx) =>{
-        if(idx === target_idx)
-          return e.target.value;
-        return item;
-      })
-    });
+  handleChangeEmergencyContact = (target_ec, target_idx, e) => {
+    if(target_ec === 1)
+      this.setState({
+        ec1: this.state.ec1.map((item, idx) =>{
+          if(idx === target_idx)
+            return e.target.value;
+          return item;
+        })
+      });
+    else
+      this.setState({
+        ec2: this.state.ec2.map((item, idx) =>{
+          if(idx === target_idx)
+            return e.target.value;
+          return item;
+        })
+      });
   }
 
-  handleChangeEmergencyContact2 = (target_idx, e) => {
-    this.setState({
-      ec1: this.state.ec2.map((item, idx) =>{
-        if(idx === target_idx)
-          return e.target.value;
-        return item;
+  handleAddEmergencyContact = (target_ec) => {
+    if(target_ec === 1)
+      this.setState({
+        ec1_num: this.state.ec1_num + 1,
+        ec1: [...this.state.ec1, '']
       })
-    });
+    else
+      this.setState({
+        ec2_num: this.state.ec2_num + 1,
+        ec2: [...this.state.ec2, '']
+      })
   }
 
   handleDeviceIdCheck = () => {
@@ -57,13 +69,30 @@ class AddDevice extends React.Component {
 
     axios.get(url)
       .then(res => {
-        if(res.status === 200){
+        if(res.status === 200)
           this.handleChangeConfirmStatus()
-        }
-        else if(res.status === 403)
-          alert('이미 사용중인 기기입니다!')
+        else
+          alert('이미 등록된 기기입니다!')
       })
-      .catch(e => alert('존재하지 않는 기기 아이디 입니다!'))
+      .catch(e => {
+        alert('존재하지 않는 기기 아이디 입니다!')
+      })
+  }
+
+  handleSubmitDeviceData = () => {
+    const url = 'http://52.231.67.172:8088/api/user/test/device';
+
+    if(!this.state.is_confirm){
+      alert('먼저 기기 인증을 하세요!');
+      return;
+    }
+
+    axios.post(url, {
+      device_id: this.state.device_id,
+      ec1: this.state.ec1,
+      ec2: this.state.ec2
+    }).then(() => alert('tesssst'))
+      .catch(e => console.log(e))
   }
 
   render() {
@@ -81,9 +110,10 @@ class AddDevice extends React.Component {
               handleDeviceIdChange={this.handleDeviceIdChange}
               handleDeviceIdCheck={this.handleDeviceIdCheck}
               ec1_num={this.state.ec1_num}
-              handleChangeEmergencyContact1={this.handleChangeEmergencyContact1}
               ec2_num={this.state.ec2_num}
-              handleChangeEmergencyContact2={this.handleChangeEmergencyContact2}
+              handleChangeEmergencyContact={this.handleChangeEmergencyContact}
+              handleAddEmergencyContact={this.handleAddEmergencyContact}
+              handleSubmitDeviceData={this.handleSubmitDeviceData}
             />
           </Col>
         </Row>

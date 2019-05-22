@@ -17,20 +17,20 @@ const DeviceForm = ({
     is_confirm, 
     handleDeviceIdChange, 
     handleDeviceIdCheck, 
-    handleDeviceForm,
     ec1_num,
-    handleChangeEmergencyContact1,
     ec2_num,
-    handleChangeEmergencyContact2
+    handleChangeEmergencyContact,
+    handleAddEmergencyContact,
+    handleSubmitDeviceData
   }) => {
     let ec1 = [];
     let ec2 = [];
     
     for(let i=0; i<ec1_num; i++)
-      ec1[i] = (<FormInput key={i} id={i} placeholder="010-0000-0000" />);
+      ec1[i] = (<FormInput key={i} id={i} onChange={e => handleChangeEmergencyContact(1, i, e)} placeholder="010-0000-0000" />);
     
     for(let i=0; i<ec2_num; i++)
-      ec2[i] = (<FormInput key={i} id={i} placeholder="010-0000-0000" />);
+      ec2[i] = (<FormInput key={i} id={i} onChange={e => handleChangeEmergencyContact(2, i, e)} placeholder="010-0000-0000" />);
 
     return (
       <Card>
@@ -62,16 +62,22 @@ const DeviceForm = ({
                     </FormGroup>
 
                     <FormGroup>
-                      <label>1st Emergency Contact</label>
+                      <Row className="m-0">
+                        <Col className="p-0"><label>1st Emergency Contact</label></Col>
+                        <div className="text-primary" onClick={() => handleAddEmergencyContact(1)}><i className="material-icons">control_point</i></div>
+                      </Row>
                       {ec1}
                     </FormGroup>
 
                     <FormGroup>
-                      <label>2nd Emergency Contact</label>
+                      <Row className="m-0">
+                        <Col className="p-0"><label>2nd Emergency Contact</label></Col>
+                        <div className="text-primary" onClick={() => handleAddEmergencyContact(2)}><i className="material-icons">control_point</i></div>
+                      </Row>
                       {ec2}
                     </FormGroup>
 
-                    <Button className="float-right" type="submit" onClick={handleDeviceForm}>Create New Device</Button>
+                    <Button className="float-right" onClick={handleSubmitDeviceData}>Create New Device</Button>
                   </Form>
                 </Col>
               </Row>
