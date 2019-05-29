@@ -91,8 +91,13 @@ class AddDevice extends React.Component {
       device_id: this.state.device_id,
       ec1: this.state.ec1,
       ec2: this.state.ec2
-    }).then(() => alert('tesssst'))
-      .catch(e => console.log(e))
+    }).then(() => {
+      alert('정상적으로 등록되었습니다.');
+      this.props.history.push('/intro');
+    }).catch(e => {
+      console.log(e);
+      alert('오류가 발생하였습니다.')
+    })
   }
 
   render() {

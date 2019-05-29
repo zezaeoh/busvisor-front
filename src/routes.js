@@ -13,6 +13,8 @@ import AddDevice from "./views/AddDevice";
 import UserInformation from "./views/UserInformation";
 import Statistics from "./views/Statistics";
 import Overview from "./views/Overview";
+import Check from "./views/Check";
+
 
 export default [
   {
@@ -61,4 +63,10 @@ export default [
     layout: DefaultLayout,
     component: Overview
   },
+  {
+    path: "/check",
+    layout: DefaultLayout,
+    component: Check
+  },
+
 ];

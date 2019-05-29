@@ -38,10 +38,10 @@ class App extends React.Component{
                 key={index}
                 path={route.path}
                 exact={route.exact}
-                component={() => {
+                component={({ history, location }) => {
                   return (
                     <route.layout login={this.state.login}>
-                      <route.component login={this.state.login}/>
+                      <route.component login={this.state.login} history={history} location={location}/>
                     </route.layout>
                   );
                 }}

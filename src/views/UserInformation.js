@@ -11,7 +11,7 @@ class UserInformation extends React.Component {
   state = {
     userDetails: {
       name: "member",
-      avatar: require("./../images/avatars/user.png"),
+      avatar: require("./../images/avatars/0.jpg"),
       id: "id",
       performanceReportTitle: "Workload",
       performanceReportValue: 0,

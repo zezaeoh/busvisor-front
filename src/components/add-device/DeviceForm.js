@@ -27,10 +27,10 @@ const DeviceForm = ({
     let ec2 = [];
     
     for(let i=0; i<ec1_num; i++)
-      ec1[i] = (<FormInput key={i} id={i} onChange={e => handleChangeEmergencyContact(1, i, e)} placeholder="010-0000-0000" />);
+      ec1[i] = (<FormInput key={i} id={i} onChange={e => handleChangeEmergencyContact(1, i, e)} placeholder="abcd@gmail.com" />);
     
     for(let i=0; i<ec2_num; i++)
-      ec2[i] = (<FormInput key={i} id={i} onChange={e => handleChangeEmergencyContact(2, i, e)} placeholder="010-0000-0000" />);
+      ec2[i] = (<FormInput key={i} id={i} onChange={e => handleChangeEmergencyContact(2, i, e)} placeholder="abcd@gmail.com" />);
 
     return (
       <Card>

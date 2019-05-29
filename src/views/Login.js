@@ -12,16 +12,21 @@ import {
   FormInput,
   Button
 } from "shards-react";
-import { Redirect } from 'react-router';
 
 import PageTitle from "./../components/common/PageTitle";
 import {Dispatcher, Constants} from "./../flux"
 import "../components/css/login.css";
 
+
 class Login extends React.Component{
   state = {
     account: '',
     password: '',
+  }
+
+  componentWillMount() {
+    if(this.props.login)
+      this.props.history.push('/intro');
   }
 
   handleLogin = () => {
@@ -53,10 +58,6 @@ class Login extends React.Component{
   }
 
   render() {
-    if (this.props.login) {
-      return (<Redirect to="/overview" />);
-    }
-  
     return (
       <Container fluid className="main-content-container px-4 pb-4">
         {/* Page Header */}
