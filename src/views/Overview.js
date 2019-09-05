@@ -18,7 +18,7 @@ class Overview extends React.Component {
   }
   
   getStatus = () => {
-    const url = `http://52.231.67.172:8088/api/device/${this.state.device_id}/status`;
+    const url = `http://13.76.199.186:8088/api/device/${this.state.device_id}/status`;
 
     axios.get(url)
       .then(res => {
@@ -32,7 +32,7 @@ class Overview extends React.Component {
   }
 
   getHistory = () => {
-    const url = `http://52.231.67.172:8088/api/device/${this.state.device_id}/history`;
+    const url = `http://13.76.199.186:8088/api/device/${this.state.device_id}/history`;
 
     axios.get(url)
       .then(res => {
@@ -56,7 +56,7 @@ class Overview extends React.Component {
   }
 
   async componentWillMount() {
-    let url = 'http://52.231.67.172:8088/api/user/test';
+    let url = 'http://13.76.199.186:8088/api/user/test';
     let res = await axios.get(url);
 
     if(!res.data.devices.length){

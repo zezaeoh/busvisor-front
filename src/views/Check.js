@@ -21,7 +21,7 @@ class Check extends React.Component {
   }
 
   handleClick = () => {
-    const url = `http://52.231.67.172:8088/api/detector/${this.state.params.token}`;
+    const url = `http://13.76.199.186:8088/api/detector/${this.state.params.token}`;
 
     if(this.state.status === 0)
       this.props.history.push('/intro');
@@ -44,7 +44,7 @@ class Check extends React.Component {
   }
 
   componentWillMount() {
-    const url = `http://52.231.67.172:8088/api/detector/${this.state.params.token}`;
+    const url = `http://13.76.199.186:8088/api/detector/${this.state.params.token}`;
 
     axios.get(url)
       .then(res => {

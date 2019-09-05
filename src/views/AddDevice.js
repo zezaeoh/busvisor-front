@@ -65,7 +65,7 @@ class AddDevice extends React.Component {
   }
 
   handleDeviceIdCheck = () => {
-    const url = `http://52.231.67.172:8088/api/device/${this.state.device_id}`;
+    const url = `http://13.76.199.186:8088/api/device/${this.state.device_id}`;
 
     axios.get(url)
       .then(res => {
@@ -80,7 +80,7 @@ class AddDevice extends React.Component {
   }
 
   handleSubmitDeviceData = () => {
-    const url = 'http://52.231.67.172:8088/api/user/test/device';
+    const url = 'http://13.76.199.186:8088/api/user/test/device';
 
     if(!this.state.is_confirm){
       alert('먼저 기기 인증을 하세요!');

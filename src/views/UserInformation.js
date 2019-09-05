@@ -39,7 +39,7 @@ class UserInformation extends React.Component {
   }
 
   componentDidMount() {
-    const url = 'http://52.231.67.172:8088/api/user/test';
+    const url = 'http://13.76.199.186:8088/api/user/test';
 
     axios.get(url)
       .then(res => {
